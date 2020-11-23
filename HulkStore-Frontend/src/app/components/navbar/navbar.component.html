@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-wrapper">
+			<a class="navbar-brand" href="#">
+				<h4>{{getTitle()}}</h4>
+			</a>
+		</div>
+		<button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed"
+			aria-controls="collapseExample">
+			<span class="navbar-toggler-bar navbar-kebab"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+			<ul class="navbar-nav">
+				<li class="nav-item" ngbDropdown>
+					<a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+						<i class="now-ui-icons users_single-02"></i> {{currentUserProfile.username}}
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+						<a class="dropdown-item" routerLink="/user-profile">Profile</a>
+						<hr>
+						<a class="dropdown-item" (click)="logout()">Logout</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

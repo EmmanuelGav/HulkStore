@@ -1,0 +1,46 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn btn-success btn-sm pull-right">
+            Add <i class="fa fa-plus"></i>
+          </button>
+          <h5 class="title">Shopping Carts' list</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-success">
+                <th>Id</th>
+                <th>Customer's name</th>
+                <th>Product's name</th>
+                <th>Shopping Cart end</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th class="text-right">Actions</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cart of carts">
+                  <td>{{cart.id}}</td>
+                  <td>{{cart.customer.fullName}}</td>
+                  <td>{{cart.product.name}}</td>
+                  <td>{{cart.finalDate+(1000*60*60*5) | date:'EEEE, MMMM d, y, h:mm:ss a'}}</td>
+                  <td>{{cart.totalPrice}}</td>
+                  <td *ngIf="cart.status"><span class="badge badge-pill badge-danger">Rented</span></td>
+                  <td *ngIf="!cart.status"><span class="badge badge-pill badge-success">Delivered</span></td>
+                  <td class="text-right">
+                    <button class="btn btn-neutral">
+                      <i class="fas fa-external-link-alt fa-2x"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

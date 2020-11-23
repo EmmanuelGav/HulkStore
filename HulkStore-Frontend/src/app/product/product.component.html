@@ -1,0 +1,138 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+
+	<div class="row">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-success btn-sm pull-right" (click)="formNewProduct();"
+				*ngIf="hasPermision(['Admin','SuperAdmin'])" style="position: relative;">
+				<b> Add </b> <i class="fa fa-plus"></i>
+			</button>
+		</div>
+		<div class="col-md-9" *ngIf="showForm">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="title"> Product's Form</h5>
+				</div>
+				<div class="card-body">
+					<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+						<div class="row">
+							<input type="hidden" class="form-control" placeholder="id" name="id"
+								[(ngModel)]="product.id">
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Name</label>
+									<input type="text" class="form-control" placeholder="Name" name="name"
+										[(ngModel)]="product.name">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Available Stock</label>
+									<input type="number" class="form-control" placeholder="Available Stock" name="stock"
+										[(ngModel)]="product.stock">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Price per Unit</label>
+									<input type="number" class="form-control" placeholder="Price per Unit"
+										name="pricePerUnit" [(ngModel)]="product.pricePerUnit">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Description</label>
+									<input type="text" class="form-control" placeholder="Description" name="description"
+										[(ngModel)]="product.description">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Imagen</label>
+									<input type="text" class="form-control" placeholder="Select image"
+										(click)="selectImage.click()">
+									<input type="file" style="display: none" name="image" (change)="updateImage($event)"
+										#selectImage>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8">
+							</div>
+							<div class="col-md-2 col-xs-2"><br>
+								<button type="submit" class="btn btn-success btn-block btn-round btn-sm">Save</button>
+							</div>
+							<div class="col-md-2 col-xs-2"><br>
+								<button type="button" class="btn btn-default btn-block btn-round btn-sm"
+									(click)="showForm = false; product = null">Cancel</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3" *ngIf="showForm">
+			<div class="card text-center" align="center">
+				<div class="image" *ngIf="selectedFile">
+					<img [src]="selectedFile" style="height: 100%; margin: 5px 5px 5px 5px;">
+				</div>
+				<div class="image" *ngIf="!selectedFile">
+					<img src="./assets/img/logo-hulk.png" style="height: 100%; margin: 5px 5px 5px 5px;">
+				</div>
+
+				<div class="card-body">
+					<div class="author">
+						<p class="title text-success"><b>{{product.name}}</b></p>
+						<hr>
+						<p class="description">
+							<b>Available Stock:</b> {{product.stock}}
+						</p>
+						<p class="description">
+							<b>Price per Unit:</b> {{product.pricePerUnit}}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3" *ngFor="let product of products">
+
+			<div class="card text-center" align="center">
+
+				<a class="text-success pull-right" *ngIf="hasPermision(['User'])"
+					style="position: absolute; z-index: 1; right: 10px; top: -28px; cursor: pointer;">
+					<h4><i class="fa fa-plus"></i></h4>
+				</a>
+				<a class="text-success pull-right" *ngIf="hasPermision(['Admin','SuperAdmin'])"  (click)="selectProduct(product)"
+					style="position: absolute; z-index: 1; right: 10px; top: -28px; cursor: pointer;">
+					<h4><i class="fa fa-edit"></i></h4>
+				</a>
+				<div class="image">
+					<img [src]="product.image" style="height: 100%; margin: 5px 5px 5px 0;">
+				</div>
+				<div class="card-body">
+					<p class="title text-success"><b>{{product.name}}</b></p>
+					<hr>
+					<p class="description">
+						<b>Available Stock:</b> {{product.stock}}
+					</p>
+					<p class="description">
+						<b>Price per Unit:</b> {{product.pricePerUnit}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12" *ngIf="!products" align="center">
+		<br>
+		<br>
+		<h1>
+			There are no products available...
+			<br>
+			try again later.
+		</h1>
+	</div>
+</div>

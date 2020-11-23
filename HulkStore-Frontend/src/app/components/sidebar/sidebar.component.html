@@ -1,0 +1,16 @@
+<div class="logo" align="center">
+    <a routerLink="/product" class="simple-text logo-normal">
+        <img src="./assets/img/logo-hulk-white.png" style="height: 80px; width: 100px;"><br>
+        <b>Hulk Store</b>
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item" [hidden]="!menuItem.show">
+            <a [routerLink]="[menuItem.path]">
+                <i class="now-ui-icons {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div>
