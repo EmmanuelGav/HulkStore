@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hulkstore.exceptions.DataNotFoundException;
-import com.hulkstore.exceptions.ExceptionResponse;
 import com.hulkstore.models.User;
 import com.hulkstore.repositories.UserRepository;
 import com.hulkstore.service.UserService;

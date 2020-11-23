@@ -45,24 +45,5 @@ public class ProductsController {
         return new ResponseEntity<Product>(productService.addProduct(product), HttpStatus.CREATED);
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> addMultipleProducts(@RequestBody List<Product> products) throws ConflictException {
-        return  new ResponseEntity<SuccessResponseDTO>(new SuccessResponseDTO(productService.uploadProducts(products)), HttpStatus.CREATED);
-    }
-
-    @GetMapping(value = "/{productId}", produces = "application/json")
-    public ResponseEntity<?> getProduct(@PathVariable Long productId) {
-        return new ResponseEntity<Product>(productService.findById(productId), HttpStatus.OK);
-    }
-
-    @PutMapping(value = "/{productId}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> updateProduct(@RequestBody Product product, @PathVariable Long productId) throws DataNotFoundException {
-        return new ResponseEntity<Product>(productService.updateProduct(product, productId), HttpStatus.ACCEPTED);
-    }
-
-    @DeleteMapping(value = "/{productId}", produces = "application/json")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long productId) throws DataNotFoundException {
-        return new ResponseEntity<SuccessResponseDTO>(new SuccessResponseDTO(productService.deleteById(productId)), HttpStatus.OK);
-    }
 
 }
