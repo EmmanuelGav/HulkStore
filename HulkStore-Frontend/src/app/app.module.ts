@@ -19,6 +19,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthenticationService } from './authentication/authentication.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   imports: [

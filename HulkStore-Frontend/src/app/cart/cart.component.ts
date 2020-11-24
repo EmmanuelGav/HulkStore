@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { element } from 'protractor';
 import { Cart } from './cart.model';
 import { CartService } from './cart.service';
 
@@ -9,24 +11,49 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
 
-  carts: Cart[];
+  cart: Cart;
   showForm = false;
 
   initialDate: String;
   finalDate: String;
 
-  constructor(private cartService: CartService) { }
+  constructor(public cartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getAll();
+    this.getProductsInCart();
   }
 
-  getAll() {
-    this.cartService.getAll()
-      .subscribe((response) => {
-        this.carts = response;
+  getProductsInCart() {
+    this.cart = this.cartService.getProductsInCart();
+  }
+
+  saveCart() {
+    let error1, error2 = false;
+    this.cart.cartProducts.map(element => {
+      if (element.amount > element.product.stock) {
+        error1 = true;
+        return;
+      }
+      if (element.amount == null || element.amount == 0) {
+        error2 = true;
+        return;
+      }
+    })
+    if (error1) {
+      this.toastr.error('The amount cannot be greater than available stock!');
+      return;
+    }
+    if (error2) {
+      this.toastr.error('The amount cannot be 0 or empty!');
+      return;
+    }
+
+    this.cartService.add(this.cart)
+      .subscribe(result => {
+        this.cart = new Cart();
+        this.cartService.cart = new Cart();
+        this.toastr.success('Cart saved!');
       });
   }
-  
 
 }

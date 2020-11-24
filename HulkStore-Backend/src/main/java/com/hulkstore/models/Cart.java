@@ -1,9 +1,9 @@
 package com.hulkstore.models;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.hulkstore.enums.Status;
 
@@ -24,18 +24,18 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
+    @OneToMany(mappedBy = "cart")
+    private Set<CartProducts> cartProducts;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
     private User user;
 
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    private Status sstatus;
-
+    private Status status;
+    
 	public long getId() {
 		return id;
 	}
@@ -44,12 +44,12 @@ public class Cart {
 		this.id = id;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Set<CartProducts> getCartProducts() {
+		return cartProducts;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setCartProducts(Set<CartProducts> cartProducts) {
+		this.cartProducts = cartProducts;
 	}
 
 	public User getUser() {
@@ -60,21 +60,20 @@ public class Cart {
 		this.user = user;
 	}
 
-	public LocalDate getOrderDate() {
+	public LocalDateTime getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	public Status getSstatus() {
-		return sstatus;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setSstatus(Status sstatus) {
-		this.sstatus = sstatus;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
-
 
 }

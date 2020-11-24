@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { UserProfile } from '../../user-profile/user-profile.model';
+import { CartService } from '../../cart/cart.service';
 
 @Component({
 	selector: 'app-navbar',
@@ -24,7 +25,8 @@ export class NavbarComponent implements OnInit {
 	constructor(location: Location,
 		private element: ElementRef,
 		private router: Router,
-		private authenticationService: AuthenticationService) {
+		public cartService: CartService,
+		public authenticationService: AuthenticationService) {
 
 		this.location = location;
 		this.sidebarVisible = false;

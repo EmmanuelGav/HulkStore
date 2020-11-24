@@ -112,6 +112,10 @@
 		    <artifactId>validation-api</artifactId>
 		</dependency>
 
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		</dependency>
 		<!-- jwt authorization -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

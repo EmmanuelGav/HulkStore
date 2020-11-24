@@ -3,12 +3,15 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { ProductComponent } from '../../product/product.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
+
+import { ProductComponent } from '../../product/product.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { CartComponent } from '../../cart/cart.component';
+import { OrderComponent } from '../../order/order.component';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -23,8 +26,9 @@ import { CartComponent } from '../../cart/cart.component';
   declarations: [
     ProductComponent,
     CartComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    OrderComponent
   ]
 })
 
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }

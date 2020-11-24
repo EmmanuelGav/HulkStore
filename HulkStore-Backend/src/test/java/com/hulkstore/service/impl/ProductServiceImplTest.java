@@ -1,12 +1,10 @@
 package com.hulkstore.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,14 +12,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.google.common.collect.Lists;
-import com.hulkstore.exceptions.DataNotFoundException;
 import com.hulkstore.models.Product;
-import com.hulkstore.models.User;
 import com.hulkstore.repositories.ProductRepository;
-import com.hulkstore.repositories.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceImplTest {

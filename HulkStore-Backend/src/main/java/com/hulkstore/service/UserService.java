@@ -1,11 +1,8 @@
 package com.hulkstore.service;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import com.hulkstore.exceptions.DataNotFoundException;
-import com.hulkstore.models.Cart;
 import com.hulkstore.models.User;
 
 public interface UserService {

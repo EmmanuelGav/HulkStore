@@ -3,6 +3,8 @@ import { Product } from './product.model';
 import { ProductService } from './product.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { CartService } from '../cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-product',
@@ -22,7 +24,9 @@ export class ProductComponent implements OnInit {
 
 	constructor(private productService: ProductService,
 		private sanitizer: DomSanitizer,
-		private authenticationService: AuthenticationService) {
+		public cartService: CartService,
+		private toastr: ToastrService,
+		public authenticationService: AuthenticationService) {
 		this.roles = this.authenticationService.currentUserProfileValue.roles;
 	}
 
@@ -58,6 +62,7 @@ export class ProductComponent implements OnInit {
 	formNewProduct() {
 		this.productForm = new Product();
 		this.product = new Product();
+		this.selectedFile = null;
 		this.showForm = true;
 	}
 
@@ -67,6 +72,8 @@ export class ProductComponent implements OnInit {
 			.subscribe(result => {
 				this.getAll();
 				this.product = Object.create(result);
+
+				this.toastr.success('Product saved!');
 			});
 	}
 
@@ -85,11 +92,4 @@ export class ProductComponent implements OnInit {
 		};
 	}
 
-	hasPermision(roleWithPermision: Array<String>) {
-		for (const role of this.roles) {
-			if (roleWithPermision.includes(role)) {
-				return true;
-			}
-		}
-	}
 }

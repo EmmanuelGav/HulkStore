@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
+		private toastr: ToastrService,
 		private authenticationService: AuthenticationService) {
 
 		if (this.authenticationService.currentUserProfileValue) {
@@ -46,8 +48,7 @@ export class LoginComponent implements OnInit {
 
 		// stop here if form is invalid
 		if (this.loginForm.invalid) {
-
-			this.error = "Form is invalid";
+			this.toastr.error("Form is invalid", "Error");
 			return;
 		}
 
@@ -59,8 +60,10 @@ export class LoginComponent implements OnInit {
 					this.router.navigate([this.returnUrl]);
 				},
 				error => {
-					this.error = error;
+					// this.error = error;
 					this.loading = false;
+					
+					this.toastr.error(error, "Error");
 				});
 	}
 }

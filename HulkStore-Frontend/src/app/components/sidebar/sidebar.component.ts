@@ -11,7 +11,9 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
 	{ path: '/product', title: 'Products', icon: 'tech_controller-modern', class: '', hasPermission: ['User','Admin','SuperAdmin'], show: false  },
-	{ path: '/cart', title: 'Shopping Cart', icon: 'shopping_cart-simple', class: '', hasPermission: ['User'], show: false }
+	{ path: '/cart', title: 'Shopping Cart', icon: 'shopping_cart-simple', class: '', hasPermission: ['User'], show: false },
+	{ path: '/order', title: 'Orders', icon: 'design_bullet-list-67', class: '', hasPermission: ['Admin','SuperAdmin'], show: false  },
+
 ];
 
 @Component({

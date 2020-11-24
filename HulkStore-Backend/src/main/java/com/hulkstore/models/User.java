@@ -65,9 +65,6 @@ public class User {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Cart> carts;
-
     public User() {	}
 
 	public User(String username, String email, String encode) {
@@ -154,14 +151,6 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	public List<Cart> getCarts() {
-		return carts;
-	}
-
-	public void setCarts(List<Cart> carts) {
-		this.carts = carts;
 	}
 
 }

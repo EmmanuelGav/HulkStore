@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
 		private router: Router,
+		private toastr: ToastrService,
 		private authenticationService: AuthenticationService) {
 
 		if (this.authenticationService.currentUserProfileValue) {
@@ -48,10 +50,12 @@ export class RegisterComponent implements OnInit {
 
 		// stop here if form is invalid
 		if (this.registerForm.invalid) {
+			this.toastr.error("Form is invalid", "Error");
 			return;
 		}
 		if (this.f.password.value != this.f.confirmPassword.value) {
-			this.error = "Passwords do not match";
+			// this.error = "Passwords do not match";
+			this.toastr.error("Passwords do not match", "Error");
 			return;
 		}
 
@@ -63,8 +67,9 @@ export class RegisterComponent implements OnInit {
 					this.router.navigate([this.returnUrl]);
 				},
 				error => {
-					this.error = error;
+					// this.error = error;
 					this.loading = false;
+					this.toastr.error(error, "Error");
 				});
 	}
 }

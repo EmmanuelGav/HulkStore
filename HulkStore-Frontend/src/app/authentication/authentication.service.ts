@@ -19,6 +19,7 @@ export class AuthenticationService {
 
     public get currentUserProfileValue(): UserProfile {
         return this.currentUserProfileSubject.value;
+        
     }
 
     login(username: string, password: string) {
@@ -44,4 +45,14 @@ export class AuthenticationService {
         localStorage.removeItem('currentUserProfile');
         this.currentUserProfileSubject.next(null);
     }
+
+    
+
+	hasPermision(roleWithPermision: Array<String>) {
+		for (const role of this.currentUserProfileValue.roles) {
+			if (roleWithPermision.includes(role)) {
+				return true;
+			}
+		}
+	}
 }

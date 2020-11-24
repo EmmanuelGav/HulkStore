@@ -1,15 +1,17 @@
 package com.hulkstore.models;
 
-import java.sql.Blob;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -27,7 +29,7 @@ public class Product {
     private String image;
     private String description;
     private String pricePerUnit;
-
+    
     @Enumerated(EnumType.STRING)
     private Category category;
 

@@ -1,13 +1,13 @@
 export class UserProfile {
-    id: BigInteger;
-    firstName: String;
-    lastName: String;
-    phoneNumber: String;
-    address: String;
-    city: String;
-	username: String;
-    email: String;
-    password: String;
-    roles: Array<String>;
-    token?: String;
+    id: number;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    address: string;
+    city: string;
+	username: string;
+    email: string;
+    password: string;
+    roles: Array<string>;
+    token?: string;
 }

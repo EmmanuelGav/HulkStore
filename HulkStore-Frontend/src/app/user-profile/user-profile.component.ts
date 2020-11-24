@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -21,6 +22,7 @@ export class UserProfileComponent implements OnInit {
 
 	constructor(private formBuilder: FormBuilder,
 		private userProfileService: UserProfileService,
+		private toastr: ToastrService,
 		private authenticationService: AuthenticationService) {
 	}
 
@@ -33,7 +35,6 @@ export class UserProfileComponent implements OnInit {
 			.subscribe(data => {
 				this.loading = false;
 				this.submitted = false;
-				this.authenticationService.currentUserProfileSubject.next(data);
 				this.currentUserProfile = data;
 				this.loadForm();
 			}, error => {
@@ -67,7 +68,7 @@ export class UserProfileComponent implements OnInit {
 			firstName: this.f.firstName.value, lastName: this.f.lastName.value, address: this.f.address.value,
 			phoneNumber: this.f.phoneNumber.value, city: this.f.city.value
 		};
-		
+
 		this.submitted = true;
 		this.loading = true;
 		this.userProfileService.save(userSaved)
@@ -78,6 +79,8 @@ export class UserProfileComponent implements OnInit {
 					this.submitted = false;
 					this.authenticationService.currentUserProfileSubject.next(data);
 					this.currentUserProfile = data;
+
+					this.toastr.success('Profile updated!');
 				},
 				error => {
 					this.error = error;

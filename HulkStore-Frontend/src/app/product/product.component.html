@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<button type="button" class="btn btn-success btn-sm pull-right" (click)="formNewProduct();"
-				*ngIf="hasPermision(['Admin','SuperAdmin'])" style="position: relative;">
+				*ngIf="authenticationService.hasPermision(['Admin','SuperAdmin'])" style="position: relative;">
 				<b> Add </b> <i class="fa fa-plus"></i>
 			</button>
 		</div>
@@ -84,7 +84,8 @@
 
 				<div class="card-body">
 					<div class="author">
-						<p class="title text-success"><b>{{product.name}}</b></p>
+						<p class="title text-success" *ngIf="selectedFile"><b>{{product.name}}</b></p>
+						<p class="title text-success" *ngIf="!selectedFile"><b>Product Name</b></p>
 						<hr>
 						<p class="description">
 							<b>Available Stock:</b> {{product.stock}}
@@ -101,12 +102,12 @@
 
 			<div class="card text-center" align="center">
 
-				<a class="text-success pull-right" *ngIf="hasPermision(['User'])"
+				<a class="text-success pull-right" *ngIf="authenticationService.hasPermision(['User'])" (click)="cartService.addProductInCart(product)"
 					style="position: absolute; z-index: 1; right: 10px; top: -28px; cursor: pointer;">
 					<h4><i class="fa fa-plus"></i></h4>
 				</a>
-				<a class="text-success pull-right" *ngIf="hasPermision(['Admin','SuperAdmin'])"  (click)="selectProduct(product)"
-					style="position: absolute; z-index: 1; right: 10px; top: -28px; cursor: pointer;">
+				<a class="text-success pull-right" *ngIf="authenticationService.hasPermision(['Admin','SuperAdmin'])"  (click)="selectProduct(product)"
+					style="position: absolute; z-index: 1; right: 10px; top: -28px; height: 5px; cursor: pointer;">
 					<h4><i class="fa fa-edit"></i></h4>
 				</a>
 				<div class="image">
